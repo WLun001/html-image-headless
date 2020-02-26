@@ -4,7 +4,7 @@ const app = express();
 
 app.get('/', (req, res, next) => {
     nodeHtmlToImage({
-        output: './image.png',
+        output: './image/image.png',
         html: '<html><body>Hello {{name}}!</body></html>',
         content: {name: 'you'}
     }).then(() => console.log('The image was created successfully!'));

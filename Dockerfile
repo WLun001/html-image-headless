@@ -43,7 +43,7 @@ USER pptruser
 WORKDIR /home/pptruser
 COPY package*.json ./
 RUN npm ci
-COPY . .
+COPY --chown=pptruser . .
 EXPOSE 3000
 
 CMD ["npm", "start"]
