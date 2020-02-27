@@ -7,8 +7,8 @@ app.get('/', (req, res, next) => {
         output: './image/image.png',
         html: '<html><body>Hello {{name}}!</body></html>',
         content: {name: 'you'}
-    }).then(() => console.log('The image was created successfully!'));
-    res.json('The image was created successfully!\'');
+    }).then(() => res.json('The image was created successfully!\''))
+        .catch(res.json('error when creating image'))
 });
 
 app.listen(3000, () => {
