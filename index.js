@@ -2,13 +2,20 @@ const nodeHtmlToImage = require('node-html-to-image');
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res, next) => {
-    nodeHtmlToImage({
-        output: './image/image.png',
-        html: '<html><body>Hello {{name}}!</body></html>',
-        content: {name: 'you'}
-    }).then(() => res.json('The image was created successfully!\''))
-        .catch(res.json('error when creating image'))
+app.get('/', async (req, res, next) => {
+
+    try {
+        const result = await nodeHtmlToImage({
+            output: './image/image.png',
+            html: '<html><body>Hello {{name}}!</body></html>',
+            puppeteerArgs: {args: ['--no-sandbox']},
+            content: {name: 'you'}
+        });
+
+        res.json('successfully created image');
+    } catch (e) {
+        res.json(e);
+    }
 });
 
 app.listen(3000, () => {
